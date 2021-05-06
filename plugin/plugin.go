@@ -15,7 +15,7 @@ import (
 
 const (
 	// MetadataFile is the plugin metadata file.
-	MetadataFile = ".plugin.cobra.yaml"
+	MetadataFile = ".plugin.registry.yaml"
 
 	defaultFile = "${name}-${version}-${os}-${arch}.tar.gz"
 )
