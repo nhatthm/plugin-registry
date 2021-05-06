@@ -100,6 +100,7 @@ plugins:
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 				fs.On("Stat", "config.yaml").
@@ -122,6 +123,7 @@ plugins:
 								File: "my-plugin",
 							},
 						},
+						Tags: plugin.Tags{},
 					},
 				},
 			},
@@ -213,6 +215,7 @@ func TestFileConfigurator_SetPlugin_Success(t *testing.T) {
 				File: "my-plugin",
 			},
 		},
+		Tags: plugin.Tags{},
 	})
 	require.NoError(t, err)
 
@@ -227,6 +230,7 @@ func TestFileConfigurator_SetPlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	assertConfigFile(t, fs, "config.yaml", expected)
@@ -291,6 +295,7 @@ func TestFileConfigurator_RemovePlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	fs := afero.NewMemMapFs()
@@ -319,6 +324,7 @@ func TestFileConfigurator_EnablePlugin_Error(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	testCases := []struct {
@@ -397,6 +403,7 @@ func TestFileConfigurator_EnablePlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	fs := afero.NewMemMapFs()
@@ -418,6 +425,7 @@ func TestFileConfigurator_EnablePlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	assertConfigFile(t, fs, "config.yaml", expected)
@@ -436,6 +444,7 @@ func TestFileConfigurator_DisablePlugin_Error(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	testCases := []struct {
@@ -514,6 +523,7 @@ func TestFileConfigurator_DisablePlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	fs := afero.NewMemMapFs()
@@ -535,6 +545,7 @@ func TestFileConfigurator_DisablePlugin_Success(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags: []
 `, runtime.GOOS, runtime.GOARCH)
 
 	assertConfigFile(t, fs, "config.yaml", expected)

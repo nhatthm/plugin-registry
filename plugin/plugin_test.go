@@ -12,6 +12,41 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+func TestPlugins_FilterByTag(t *testing.T) {
+	t.Parallel()
+
+	t.Run("found", func(t *testing.T) {
+		t.Parallel()
+
+		plugins := Plugins{
+			"plugin1": {Tags: Tags{"tag1", "tag2"}},
+			"plugin2": {Tags: Tags{"tag2", "tag3"}},
+			"plugin3": {Tags: Tags{"tag3", "tag4"}},
+		}
+
+		expected := Plugins{
+			"plugin1": {Tags: Tags{"tag1", "tag2"}},
+			"plugin2": {Tags: Tags{"tag2", "tag3"}},
+		}
+
+		assert.Equal(t, expected, plugins.FilterByTag("tag2"))
+	})
+
+	t.Run("not found", func(t *testing.T) {
+		t.Parallel()
+
+		plugins := Plugins{
+			"plugin1": {Tags: Tags{"tag1", "tag2"}},
+			"plugin2": {Tags: Tags{"tag2", "tag3"}},
+			"plugin3": {Tags: Tags{"tag3", "tag4"}},
+		}
+
+		expected := Plugins{}
+
+		assert.Equal(t, expected, plugins.FilterByTag("tag5"))
+	})
+}
+
 func TestPlugin_RuntimeArtifact(t *testing.T) {
 	t.Parallel()
 
@@ -88,6 +123,7 @@ description: ""
 enabled: false
 hidden: false
 artifacts: {}
+tags: []
 `,
 		},
 		{
@@ -114,6 +150,7 @@ hidden: true
 artifacts:
     darwin:
         file: my-plugin
+tags: []
 `,
 		},
 		{
@@ -140,6 +177,7 @@ hidden: true
 artifacts:
     darwin/amd64:
         file: my-plugin
+tags: []
 `,
 		},
 	}
@@ -290,6 +328,8 @@ hidden: true
 artifacts:
     os:
         file: "${name}-${version}-${os}.tar.gz"
+tags:
+    - tag1
 `,
 			expectedResult: Plugin{
 				Name:        "my-plugin",
@@ -306,6 +346,7 @@ artifacts:
 						File: "${name}-${version}-${os}.tar.gz",
 					},
 				},
+				Tags: Tags{"tag1"},
 			},
 		},
 		{
@@ -347,6 +388,26 @@ artifacts:
 			}
 		})
 	}
+}
+
+func TestTags_Contains(t *testing.T) {
+	t.Parallel()
+
+	t.Run("found", func(t *testing.T) {
+		t.Parallel()
+
+		tags := Tags{"tag1", "tag2", "tag3"}
+
+		assert.True(t, tags.Contains("tag2"))
+	})
+
+	t.Run("not found", func(t *testing.T) {
+		t.Parallel()
+
+		tags := Tags{"tag1", "tag2", "tag3"}
+
+		assert.False(t, tags.Contains("tag4"))
+	})
 }
 
 func TestRuntimeArtifactIdentifier(t *testing.T) {

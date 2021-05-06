@@ -26,6 +26,8 @@ func TestIntegrationFsRegistry_Uninstall(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags:
+            - tag1
 `, runtime.GOOS, runtime.GOARCH)
 
 	registryDir := t.TempDir()

@@ -45,6 +45,7 @@ func TestIntegrationFsRegistry_Install_NoConfigFile(t *testing.T) {
 						File: "my-plugin",
 					},
 				},
+				Tags: plugin.Tags{"tag1"},
 			}
 
 			return p, aferocopy.Copy(pluginDir, "resources/fixtures")
@@ -79,6 +80,8 @@ func TestIntegrationFsRegistry_Install_NoConfigFile(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags:
+            - tag1
 `, runtime.GOOS, runtime.GOARCH)
 	actual, err := afero.ReadFile(fs, configFile)
 	require.NoError(t, err)
@@ -116,6 +119,7 @@ func TestIntegrationFsRegistry_Install_HasConfigFile(t *testing.T) {
 						File: "my-plugin",
 					},
 				},
+				Tags: plugin.Tags{"tag1"},
 			}
 
 			return p, aferocopy.Copy(pluginDir, "resources/fixtures")
@@ -150,6 +154,8 @@ func TestIntegrationFsRegistry_Install_HasConfigFile(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags:
+            - tag1
 `, runtime.GOOS, runtime.GOARCH)
 	actual, err := afero.ReadFile(fs, configFile)
 	require.NoError(t, err)

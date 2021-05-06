@@ -25,6 +25,8 @@ func TestIntegrationFsRegistry_Disable(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags:
+            - tag1
 `, runtime.GOOS, runtime.GOARCH)
 
 	registryDir := t.TempDir()
@@ -53,6 +55,8 @@ func TestIntegrationFsRegistry_Disable(t *testing.T) {
         artifacts:
             %s/%s:
                 file: my-plugin
+        tags:
+            - tag1
 `, runtime.GOOS, runtime.GOARCH)
 	actual, err := afero.ReadFile(fs, configFile)
 	require.NoError(t, err)

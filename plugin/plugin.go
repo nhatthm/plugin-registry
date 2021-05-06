@@ -23,6 +23,22 @@ const (
 // ErrPluginNotExist indicates that the plugin does not exist.
 var ErrPluginNotExist = errors.New("plugin does not exist")
 
+// Plugins is a map of plugins.
+type Plugins map[string]Plugin
+
+// FilterByTag filter the plugins by tags.
+func (p Plugins) FilterByTag(tag string) Plugins {
+	result := make(Plugins, len(p))
+
+	for k, v := range p {
+		if v.Tags.Contains(tag) {
+			result[k] = v
+		}
+	}
+
+	return result
+}
+
 // Plugin represents metadata of a plugin.
 type Plugin struct {
 	Name        string    `yaml:"name"`
@@ -32,6 +48,7 @@ type Plugin struct {
 	Enabled     bool      `yaml:"enabled"`
 	Hidden      bool      `yaml:"hidden"`
 	Artifacts   Artifacts `yaml:"artifacts"`
+	Tags        Tags      `yaml:"tags"`
 }
 
 // RuntimeArtifact returns the artifact of current arch.
@@ -80,6 +97,20 @@ func (p *Plugin) UnmarshalYAML(value *yaml.Node) error {
 	*p = Plugin(raw)
 
 	return nil
+}
+
+// Tags is a list of string tag.
+type Tags []string
+
+// Contains checks whether a tag is in the list or not.
+func (t Tags) Contains(tag string) bool {
+	for _, v := range t {
+		if v == tag {
+			return true
+		}
+	}
+
+	return false
 }
 
 // Artifacts is a map of Artifact, identified by os and arch.
