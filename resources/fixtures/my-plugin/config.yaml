@@ -1,0 +1,10 @@
+plugins:
+    my-plugin:
+        name: my-plugin
+        url: "https://example.org"
+        version: v1.2.0
+        enabled: true
+        hidden: true
+        artifacts:
+            darwin/amd64:
+                file: my-plugin

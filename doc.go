@@ -1,2 +1,2 @@
-// Package main
-package main
+// Package registry provides plugins functionalities for cobra cli application.
+package registry
