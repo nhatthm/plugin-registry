@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	registry "github.com/nhatthm/plugin-registry"
+	"github.com/nhatthm/plugin-registry/config"
 	"github.com/nhatthm/plugin-registry/installer"
 	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 	installerMock "github.com/nhatthm/plugin-registry/mock/installer"
@@ -67,9 +68,22 @@ func TestFsRegistry_Install(t *testing.T) {
 			expectedError:     "install error",
 		},
 		{
+			scenario:          "could not get config",
+			registerInstaller: registerSuccessInstaller,
+			mockConfig: configuratorMock.Mock(func(c *configuratorMock.Configurator) {
+				c.On("Config").
+					Return(config.Configuration{}, errors.New("get config error"))
+			}),
+			source:        "INSTALL_SUCCESS",
+			expectedError: "get config error",
+		},
+		{
 			scenario:          "could not update configuration",
 			registerInstaller: registerSuccessInstaller,
 			mockConfig: configuratorMock.Mock(func(c *configuratorMock.Configurator) {
+				c.On("Config").
+					Return(config.Configuration{}, nil)
+
 				c.On("SetPlugin", plugin.Plugin{Name: "my-plugin"}).
 					Return(errors.New("config error"))
 			}),
@@ -80,6 +94,9 @@ func TestFsRegistry_Install(t *testing.T) {
 			scenario:          "success",
 			registerInstaller: registerSuccessInstaller,
 			mockConfig: configuratorMock.Mock(func(c *configuratorMock.Configurator) {
+				c.On("Config").
+					Return(config.Configuration{}, nil)
+
 				c.On("SetPlugin", plugin.Plugin{Name: "my-plugin"}).
 					Return(nil)
 			}),

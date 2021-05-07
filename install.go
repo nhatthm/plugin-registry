@@ -24,6 +24,16 @@ func (r *FsRegistry) installer(i installer.Installer) installer.CallbackInstalle
 			return nil, err
 		}
 
+		oldPlugin, err := r.GetPlugin(p.Name)
+		if err != nil {
+			return nil, err
+		}
+
+		// Do not accidentally enable the disabled plugin.
+		if oldPlugin != nil {
+			p.Enabled = oldPlugin.Enabled
+		}
+
 		return p, r.config.SetPlugin(*p)
 	}
 }

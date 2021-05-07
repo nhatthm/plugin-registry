@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/nhatthm/plugin-registry/config"
+	"github.com/nhatthm/plugin-registry/plugin"
 	"github.com/spf13/afero"
 )
 
@@ -31,6 +32,21 @@ type FsRegistry struct {
 // Config returns the configuration of the registry.
 func (r *FsRegistry) Config() (config.Configuration, error) {
 	return r.config.Config()
+}
+
+// GetPlugin gets plugin by name.
+func (r *FsRegistry) GetPlugin(name string) (*plugin.Plugin, error) {
+	cfg, err := r.Config()
+	if err != nil {
+		return nil, err
+	}
+
+	p, ok := cfg.Plugins[name]
+	if !ok {
+		return nil, nil
+	}
+
+	return &p, nil
 }
 
 // NewRegistry initiates a new plugin registry.
