@@ -53,13 +53,16 @@ func (r *FsRegistry) GetPlugin(name string) (*plugin.Plugin, error) {
 // NewRegistry initiates a new plugin registry.
 func NewRegistry(path string, options ...Option) (*FsRegistry, error) {
 	r := &FsRegistry{
-		fs:         afero.NewOsFs(),
-		path:       filepath.Clean(path),
-		configFile: filepath.Join(path, "config.yaml"),
+		fs:   afero.NewOsFs(),
+		path: filepath.Clean(path),
 	}
 
 	for _, o := range options {
 		o(r)
+	}
+
+	if r.configFile == "" {
+		r.configFile = filepath.Join(path, "config.yaml")
 	}
 
 	if r.config == nil {
