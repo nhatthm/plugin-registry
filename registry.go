@@ -14,6 +14,7 @@ type Option func(r *FsRegistry)
 
 // Registry is a plugin registry.
 type Registry interface {
+	Config() (config.Configuration, error)
 	Enable(name string) error
 	Disable(name string) error
 	Install(ctx context.Context, src string) error

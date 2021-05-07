@@ -5,8 +5,59 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/nhatthm/plugin-registry/config"
+	"github.com/nhatthm/plugin-registry/plugin"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestConfig(t *testing.T) {
+	t.Parallel()
+
+	testCases := []struct {
+		scenario       string
+		mockRegistry   Mocker
+		expectedConfig config.Configuration
+		expectedError  string
+	}{
+		{
+			scenario: "error",
+			mockRegistry: MockRegistry(func(r *Registry) {
+				r.On("Config").
+					Return(config.Configuration{}, errors.New("error"))
+			}),
+			expectedError: "error",
+		},
+		{
+			scenario: "no error",
+			mockRegistry: MockRegistry(func(r *Registry) {
+				r.On("Config").
+					Return(config.Configuration{
+						Plugins: plugin.Plugins{},
+					}, nil)
+			}),
+			expectedConfig: config.Configuration{
+				Plugins: plugin.Plugins{},
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.scenario, func(t *testing.T) {
+			t.Parallel()
+
+			cfg, err := tc.mockRegistry(t).Config()
+
+			assert.Equal(t, tc.expectedConfig, cfg)
+
+			if tc.expectedError == "" {
+				assert.NoError(t, err)
+			} else {
+				assert.EqualError(t, err, tc.expectedError)
+			}
+		})
+	}
+}
 
 func TestEnable(t *testing.T) {
 	t.Parallel()

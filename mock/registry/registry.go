@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	registry "github.com/nhatthm/plugin-registry"
+	"github.com/nhatthm/plugin-registry/config"
 	"github.com/stretchr/testify/assert"
 	tMock "github.com/stretchr/testify/mock"
 )
@@ -20,6 +21,13 @@ var _ registry.Registry = (*Registry)(nil)
 // Registry is a registry.Registry.
 type Registry struct {
 	tMock.Mock
+}
+
+// Config satisfies registry.Registry.
+func (r *Registry) Config() (config.Configuration, error) {
+	ret := r.Called()
+
+	return ret.Get(0).(config.Configuration), ret.Error(1)
 }
 
 // Enable satisfies registry.Registry.
