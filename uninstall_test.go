@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestFsRegistry_Uninstall(t *testing.T) {
+func TestRegistry_Uninstall(t *testing.T) {
 	t.Parallel()
 
 	testCases := []struct {

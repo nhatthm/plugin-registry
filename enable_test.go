@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestFsRegistry_Enable(t *testing.T) {
+func TestRegistry_Enable(t *testing.T) {
 	t.Parallel()
 
 	testCases := []struct {

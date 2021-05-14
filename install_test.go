@@ -16,7 +16,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestFsRegistry_Install(t *testing.T) {
+func TestRegistry_Install(t *testing.T) {
 	t.Parallel()
 
 	registerInstaller := func(caseName string, construct func(t *testing.T) installer.Installer) func(t *testing.T) {
