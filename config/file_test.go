@@ -239,6 +239,19 @@ func TestFileConfigurator_SetPlugin_Success(t *testing.T) {
 func TestFileConfigurator_RemovePlugin_Error(t *testing.T) {
 	t.Parallel()
 
+	cfg := fmt.Sprintf(`plugins:
+    my-plugin:
+        name: my-plugin
+        url: https://example.org
+        version: v1.2.0
+        enabled: true
+        hidden: true
+        artifacts:
+            %s/%s:
+                file: my-plugin
+        tags: []
+`, runtime.GOOS, runtime.GOARCH)
+
 	testCases := []struct {
 		scenario      string
 		mockFs        aferomock.FsMocker
@@ -253,10 +266,21 @@ func TestFileConfigurator_RemovePlugin_Error(t *testing.T) {
 			expectedError: "load error",
 		},
 		{
-			scenario: "could not open file for write",
+			scenario: "plugin not found",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
 					Return(nil, os.ErrNotExist)
+			}),
+			expectedError: "plugin does not exist",
+		},
+		{
+			scenario: "could not open file for write",
+			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
+				fs.On("Stat", "config.yaml").
+					Return(aferomock.NewFileInfo(), nil)
+
+				fs.On("Open", "config.yaml").
+					Return(makeConfigFile(cfg), nil)
 
 				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644)).
 					Return(nil, errors.New("open error"))

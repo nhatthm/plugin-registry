@@ -77,6 +77,10 @@ func (c *FileConfigurator) RemovePlugin(name string) error {
 		return err
 	}
 
+	if _, ok := cfg.Plugins[name]; !ok {
+		return plugin.ErrPluginNotExist
+	}
+
 	delete(cfg.Plugins, name)
 
 	return c.writeLocked(cfg)
