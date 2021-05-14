@@ -180,6 +180,43 @@ artifacts:
 tags: []
 `,
 		},
+		{
+			scenario: "multiple artifacts",
+			plugin: Plugin{
+				Name:        "my-plugin",
+				URL:         "https://example.org",
+				Version:     "v1.2.0",
+				Description: "my plugin",
+				Enabled:     true,
+				Hidden:      true,
+				Artifacts: Artifacts{
+					NewArtifactIdentifier("linux", "amd64"): {
+						File: "my-plugin",
+					},
+					NewArtifactIdentifier("windows", "amd64"): {
+						File: "my-plugin",
+					},
+					NewArtifactIdentifier("darwin", "amd64"): {
+						File: "my-plugin",
+					},
+				},
+			},
+			expected: `name: my-plugin
+url: https://example.org
+version: v1.2.0
+description: my plugin
+enabled: true
+hidden: true
+artifacts:
+    darwin/amd64:
+        file: my-plugin
+    linux/amd64:
+        file: my-plugin
+    windows/amd64:
+        file: my-plugin
+tags: []
+`,
+		},
 	}
 
 	for _, tc := range testCases {

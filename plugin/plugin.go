@@ -123,6 +123,17 @@ func (a *Artifacts) Has(id ArtifactIdentifier) bool {
 	return ok
 }
 
+// MarshalYAML satisfies yaml.Marshaler.
+func (a Artifacts) MarshalYAML() (interface{}, error) { // nolint: unparam
+	raw := make(map[string]Artifact, len(a))
+
+	for k, v := range a {
+		raw[k.String()] = v
+	}
+
+	return raw, nil
+}
+
 // ArtifactIdentifier represents information to identify an artifact.
 type ArtifactIdentifier struct {
 	OS   string
@@ -140,11 +151,6 @@ func (a ArtifactIdentifier) String() string {
 	}
 
 	return s
-}
-
-// MarshalYAML satisfies yaml.Marshaler.
-func (a ArtifactIdentifier) MarshalYAML() (interface{}, error) { // nolint: unparam
-	return a.String(), nil
 }
 
 // UnmarshalYAML satisfies yaml.Unmarshaler.
