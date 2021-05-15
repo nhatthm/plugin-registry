@@ -20,24 +20,24 @@ func TestRegistry_Uninstall(t *testing.T) {
 		expectedError string
 	}{
 		{
-			scenario: "remove error",
-			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
-				fs.On("RemoveAll", "/tmp/my-plugin").
-					Return(errors.New("remove error"))
-			}),
-			expectedError: "remove error",
-		},
-		{
 			scenario: "config error",
-			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
-				fs.On("RemoveAll", "/tmp/my-plugin").
-					Return(nil)
-			}),
 			mockConfig: configuratorMock.Mock(func(c *configuratorMock.Configurator) {
 				c.On("RemovePlugin", "my-plugin").
 					Return(errors.New("config error"))
 			}),
 			expectedError: "config error",
+		},
+		{
+			scenario: "remove error",
+			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
+				fs.On("RemoveAll", "/tmp/my-plugin").
+					Return(errors.New("remove error"))
+			}),
+			mockConfig: configuratorMock.Mock(func(c *configuratorMock.Configurator) {
+				c.On("RemovePlugin", "my-plugin").
+					Return(nil)
+			}),
+			expectedError: "remove error",
 		},
 		{
 			scenario: "success",
@@ -57,8 +57,8 @@ func TestRegistry_Uninstall(t *testing.T) {
 		t.Run(tc.scenario, func(t *testing.T) {
 			t.Parallel()
 
-			if tc.mockConfig == nil {
-				tc.mockConfig = configuratorMock.NoMock
+			if tc.mockFs == nil {
+				tc.mockFs = aferomock.NoMockFs
 			}
 
 			r, err := NewRegistry("/tmp",
