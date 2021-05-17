@@ -77,7 +77,7 @@ func (c *FileConfigurator) RemovePlugin(name string) error {
 		return err
 	}
 
-	if _, ok := cfg.Plugins[name]; !ok {
+	if !cfg.Plugins.Has(name) {
 		return plugin.ErrPluginNotExist
 	}
 

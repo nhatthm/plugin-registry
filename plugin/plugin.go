@@ -39,6 +39,13 @@ func (p Plugins) FilterByTag(tag string) Plugins {
 	return result
 }
 
+// Has checks whether the plugin is in the map or not.
+func (p Plugins) Has(name string) bool {
+	_, ok := p[name]
+
+	return ok
+}
+
 // Plugin represents metadata of a plugin.
 type Plugin struct {
 	Name        string    `yaml:"name"`

@@ -47,6 +47,34 @@ func TestPlugins_FilterByTag(t *testing.T) {
 	})
 }
 
+func TestPlugins_Has(t *testing.T) {
+	t.Parallel()
+
+	t.Run("found", func(t *testing.T) {
+		t.Parallel()
+
+		plugins := Plugins{
+			"plugin1": {Tags: Tags{"tag1", "tag2"}},
+			"plugin2": {Tags: Tags{"tag2", "tag3"}},
+			"plugin3": {Tags: Tags{"tag3", "tag4"}},
+		}
+
+		assert.True(t, plugins.FilterByTag("tag2").Has("plugin1"))
+	})
+
+	t.Run("not found", func(t *testing.T) {
+		t.Parallel()
+
+		plugins := Plugins{
+			"plugin1": {Tags: Tags{"tag1", "tag2"}},
+			"plugin2": {Tags: Tags{"tag2", "tag3"}},
+			"plugin3": {Tags: Tags{"tag3", "tag4"}},
+		}
+
+		assert.False(t, plugins.FilterByTag("tag5").Has("plugin1"))
+	})
+}
+
 func TestPlugin_RuntimeArtifact(t *testing.T) {
 	t.Parallel()
 
