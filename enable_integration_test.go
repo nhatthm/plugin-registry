@@ -6,10 +6,11 @@ import (
 	"runtime"
 	"testing"
 
-	registry "github.com/nhatthm/plugin-registry"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	registry "github.com/nhatthm/plugin-registry"
 )
 
 func TestIntegrationFsRegistry_Enable(t *testing.T) {
@@ -33,7 +34,7 @@ func TestIntegrationFsRegistry_Enable(t *testing.T) {
 	configFile := filepath.Join(registryDir, "config.yaml")
 
 	fs := afero.NewOsFs()
-	err := afero.WriteFile(fs, configFile, []byte(cfg), 0755)
+	err := afero.WriteFile(fs, configFile, []byte(cfg), 0o755)
 	require.NoError(t, err)
 
 	// Enable plugin.

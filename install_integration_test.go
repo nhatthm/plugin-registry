@@ -25,7 +25,7 @@ func TestIntegrationFsRegistry_Install_NoConfigFile(t *testing.T) {
 
 	fs := afero.NewOsFs()
 
-	err := fs.Mkdir(pluginDir, 0755)
+	err := fs.Mkdir(pluginDir, 0o755)
 	require.NoError(t, err)
 
 	// Register installer.
@@ -96,10 +96,10 @@ func TestIntegrationFsRegistry_Install_HasConfigFile(t *testing.T) {
 	pluginDir := filepath.Join(registryDir, "my-plugin")
 
 	fs := afero.NewOsFs()
-	err := afero.WriteFile(fs, configFile, []byte(`plugins: {}`), 0755)
+	err := afero.WriteFile(fs, configFile, []byte(`plugins: {}`), 0o755)
 	require.NoError(t, err)
 
-	err = fs.Mkdir(pluginDir, 0755)
+	err = fs.Mkdir(pluginDir, 0o755)
 	require.NoError(t, err)
 
 	// Register installer.
@@ -184,10 +184,10 @@ func TestIntegrationFsRegistry_Install_HasDisabledPlugin(t *testing.T) {
 	pluginDir := filepath.Join(registryDir, "my-plugin")
 
 	fs := afero.NewOsFs()
-	err := afero.WriteFile(fs, configFile, []byte(cfg), 0755)
+	err := afero.WriteFile(fs, configFile, []byte(cfg), 0o755)
 	require.NoError(t, err)
 
-	err = fs.Mkdir(pluginDir, 0755)
+	err = fs.Mkdir(pluginDir, 0o755)
 	require.NoError(t, err)
 
 	// Register installer.

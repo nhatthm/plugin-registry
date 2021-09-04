@@ -27,7 +27,7 @@ func makeConfigFile(data string) afero.File {
 }
 
 func writeConfigFile(fs afero.Fs, data string) error {
-	return afero.WriteFile(fs, "config.yaml", []byte(data), os.FileMode(0644))
+	return afero.WriteFile(fs, "config.yaml", []byte(data), os.FileMode(0o644))
 }
 
 func assertConfigFile(t *testing.T, fs afero.Fs, name string, expected string) bool { // nolint: unparam
@@ -171,7 +171,7 @@ func TestFileConfigurator_SetPlugin_Error(t *testing.T) {
 				fs.On("Stat", "config.yaml").
 					Return(nil, os.ErrNotExist)
 
-				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644)).
+				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644)).
 					Return(nil, errors.New("open error"))
 			}),
 			expectedError: "open error",
@@ -282,7 +282,7 @@ func TestFileConfigurator_RemovePlugin_Error(t *testing.T) {
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
 
-				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644)).
+				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644)).
 					Return(nil, errors.New("open error"))
 			}),
 			expectedError: "open error",
@@ -386,7 +386,7 @@ func TestFileConfigurator_EnablePlugin_Error(t *testing.T) {
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
 
-				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644)).
+				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644)).
 					Return(nil, errors.New("open error"))
 			}),
 			expectedError: "open error",
@@ -506,7 +506,7 @@ func TestFileConfigurator_DisablePlugin_Error(t *testing.T) {
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
 
-				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644)).
+				fs.On("OpenFile", "config.yaml", os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644)).
 					Return(nil, errors.New("open error"))
 			}),
 			expectedError: "open error",

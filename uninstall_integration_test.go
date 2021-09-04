@@ -7,10 +7,11 @@ import (
 	"testing"
 
 	"github.com/nhatthm/aferocopy"
-	registry "github.com/nhatthm/plugin-registry"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	registry "github.com/nhatthm/plugin-registry"
 )
 
 func TestIntegrationFsRegistry_Uninstall(t *testing.T) {
@@ -35,10 +36,10 @@ func TestIntegrationFsRegistry_Uninstall(t *testing.T) {
 	pluginDir := filepath.Join(registryDir, "my-plugin")
 
 	fs := afero.NewOsFs()
-	err := afero.WriteFile(fs, configFile, []byte(cfg), 0755)
+	err := afero.WriteFile(fs, configFile, []byte(cfg), 0o755)
 	require.NoError(t, err)
 
-	err = fs.Mkdir(pluginDir, 0755)
+	err = fs.Mkdir(pluginDir, 0o755)
 	require.NoError(t, err)
 
 	err = aferocopy.Copy(pluginDir, "resources/fixtures")

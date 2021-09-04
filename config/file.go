@@ -6,9 +6,10 @@ import (
 	"sync"
 
 	"github.com/bool64/ctxd"
-	"github.com/nhatthm/plugin-registry/plugin"
 	"github.com/spf13/afero"
 	"gopkg.in/yaml.v3"
+
+	"github.com/nhatthm/plugin-registry/plugin"
 )
 
 var _ Configurator = (*FileConfigurator)(nil)
@@ -129,7 +130,7 @@ func (c *FileConfigurator) DisablePlugin(name string) error {
 }
 
 func (c *FileConfigurator) writeLocked(cfg Configuration) error {
-	f, err := c.fs.OpenFile(c.configFile, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0644))
+	f, err := c.fs.OpenFile(c.configFile, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644))
 	if err != nil {
 		return err
 	}
