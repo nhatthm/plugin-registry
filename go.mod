@@ -3,7 +3,7 @@ module github.com/nhatthm/plugin-registry
 go 1.17
 
 require (
-	github.com/bool64/ctxd v1.0.0
+	github.com/bool64/ctxd v1.1.0
 	github.com/nhatthm/aferocopy v1.1.0
 	github.com/nhatthm/aferomock v0.3.1
 	github.com/spf13/afero v1.8.1
