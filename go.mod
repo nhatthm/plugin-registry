@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/bool64/ctxd v1.1.3
-	github.com/nhatthm/aferocopy v1.1.0
+	github.com/nhatthm/aferocopy v1.2.0
 	github.com/nhatthm/aferomock v0.3.1
 	github.com/spf13/afero v1.8.2
 	github.com/stretchr/testify v1.7.2
