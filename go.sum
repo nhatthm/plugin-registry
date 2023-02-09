@@ -157,8 +157,8 @@ github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9de
 github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
-go.nhat.io/aferocopy/v2 v2.0.0 h1:06prv4vWV9DPg2/a+uBT9sdP3lp30ENakza5/HHj/qU=
-go.nhat.io/aferocopy/v2 v2.0.0/go.mod h1:Nyd1b35gqLm279GSd7OOVS3qBGcRAIaJ/rsZCGENtD0=
+go.nhat.io/aferocopy/v2 v2.0.1 h1:z+AXOocir6zZsBbd1WXj0yny0cn3G0xqVJftD//tSSw=
+go.nhat.io/aferocopy/v2 v2.0.1/go.mod h1:cUjw3cg2oAx1YqGp2VJl248LsNW/x4PDVHESfxfdHww=
 go.nhat.io/aferomock v0.4.0 h1:gs3nJzIqAezglUuaPfautAmZwulwRWLcfSSzdK4YCC0=
 go.nhat.io/aferomock v0.4.0/go.mod h1:msi5MDOtJ/AroUa/lDc3jVGOILM4SKP//4yBRImOvkI=
 go.opencensus.io v0.21.0/go.mod h1:mSImk1erAIZhrmZN+AvHh14ztQfjbGwt4TtuofqLduU=
