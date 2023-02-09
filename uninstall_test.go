@@ -4,10 +4,11 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nhatthm/aferomock"
-	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.nhat.io/aferomock"
+
+	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 )
 
 func TestRegistry_Uninstall(t *testing.T) {

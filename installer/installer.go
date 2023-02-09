@@ -5,9 +5,10 @@ import (
 	"errors"
 	"sync"
 
+	"github.com/spf13/afero"
+
 	fsCtx "github.com/nhatthm/plugin-registry/context"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/spf13/afero"
 )
 
 var (

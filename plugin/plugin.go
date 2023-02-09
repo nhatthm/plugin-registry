@@ -131,7 +131,7 @@ func (a *Artifacts) Has(id ArtifactIdentifier) bool {
 }
 
 // MarshalYAML satisfies yaml.Marshaler.
-func (a Artifacts) MarshalYAML() (interface{}, error) { // nolint: unparam
+func (a Artifacts) MarshalYAML() (interface{}, error) { //nolint: unparam
 	raw := make(map[string]Artifact, len(a))
 
 	for k, v := range a {

@@ -504,7 +504,7 @@ func TestLoad(t *testing.T) {
 			scenario: "could not decode",
 			makeFs: func() afero.Fs {
 				fs := afero.NewMemMapFs()
-				_ = afero.WriteFile(fs, "/tmp/.plugin.registry.yaml", []byte("[]"), 0o755) // nolint: errcheck
+				_ = afero.WriteFile(fs, "/tmp/.plugin.registry.yaml", []byte("[]"), 0o755) //nolint: errcheck
 
 				return fs
 			},
@@ -514,7 +514,7 @@ func TestLoad(t *testing.T) {
 			scenario: "success",
 			makeFs: func() afero.Fs {
 				fs := afero.NewMemMapFs()
-				_ = afero.WriteFile(fs, "/tmp/.plugin.registry.yaml", []byte("name: my-plugin"), 0o755) // nolint: errcheck
+				_ = afero.WriteFile(fs, "/tmp/.plugin.registry.yaml", []byte("name: my-plugin"), 0o755) //nolint: errcheck
 
 				return fs
 			},

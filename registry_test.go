@@ -4,12 +4,13 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nhatthm/aferomock"
-	"github.com/nhatthm/plugin-registry/config"
-	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.nhat.io/aferomock"
+
+	"github.com/nhatthm/plugin-registry/config"
+	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 )
 
 func TestNewRegistry(t *testing.T) {

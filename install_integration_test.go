@@ -7,13 +7,14 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/nhatthm/aferocopy"
-	registry "github.com/nhatthm/plugin-registry"
-	"github.com/nhatthm/plugin-registry/installer"
-	"github.com/nhatthm/plugin-registry/plugin"
 	"github.com/spf13/afero"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.nhat.io/aferocopy/v2"
+
+	registry "github.com/nhatthm/plugin-registry"
+	"github.com/nhatthm/plugin-registry/installer"
+	"github.com/nhatthm/plugin-registry/plugin"
 )
 
 func TestIntegrationFsRegistry_Install_NoConfigFile(t *testing.T) {
