@@ -4,9 +4,10 @@ import (
 	"context"
 	"path/filepath"
 
+	"github.com/spf13/afero"
+
 	"github.com/nhatthm/plugin-registry/config"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/spf13/afero"
 )
 
 // Option configures Registry.
@@ -44,7 +45,7 @@ func (r *FsRegistry) GetPlugin(name string) (*plugin.Plugin, error) {
 
 	p, ok := cfg.Plugins[name]
 	if !ok {
-		return nil, nil
+		return nil, nil //nolint: nilnil
 	}
 
 	return &p, nil

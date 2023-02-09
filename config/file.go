@@ -130,11 +130,11 @@ func (c *FileConfigurator) DisablePlugin(name string) error {
 }
 
 func (c *FileConfigurator) writeLocked(cfg Configuration) error {
-	f, err := c.fs.OpenFile(c.configFile, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644))
+	f, err := c.fs.OpenFile(c.configFile, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.FileMode(0o644)) //nolint: nosnakecase
 	if err != nil {
 		return err
 	}
-	defer f.Close() // nolint: errcheck
+	defer f.Close() //nolint: errcheck
 
 	enc := yaml.NewEncoder(f)
 
@@ -151,7 +151,7 @@ func (c *FileConfigurator) loadLocked() (Configuration, error) {
 	if err != nil {
 		return Configuration{}, err
 	}
-	defer f.Close() // nolint: errcheck
+	defer f.Close() //nolint: errcheck
 
 	var cfg Configuration
 
