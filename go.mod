@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/bool64/ctxd v1.2.1
 	github.com/spf13/afero v1.9.4
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	go.nhat.io/aferocopy/v2 v2.0.1
 	go.nhat.io/aferomock v0.4.0
 	gopkg.in/yaml.v3 v3.0.1
