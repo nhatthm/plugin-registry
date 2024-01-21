@@ -142,9 +142,9 @@ plugins:
 			assert.Equal(t, tc.expectedConfig, cfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -189,9 +189,9 @@ func TestFileConfigurator_SetPlugin_Error(t *testing.T) {
 			err := c.SetPlugin(plugin.Plugin{Name: "my-plugin"})
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -301,9 +301,9 @@ func TestFileConfigurator_RemovePlugin_Error(t *testing.T) {
 			err := c.RemovePlugin("my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -410,9 +410,9 @@ func TestFileConfigurator_EnablePlugin_Error(t *testing.T) {
 			err := c.EnablePlugin(tc.pluginName)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -531,9 +531,9 @@ func TestFileConfigurator_DisablePlugin_Error(t *testing.T) {
 			err := c.DisablePlugin(tc.pluginName)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}

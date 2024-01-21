@@ -4,13 +4,14 @@ import (
 	"context"
 	"testing"
 
+	"github.com/spf13/afero"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	fsCtx "github.com/nhatthm/plugin-registry/context"
 	"github.com/nhatthm/plugin-registry/installer"
 	installerMock "github.com/nhatthm/plugin-registry/mock/installer"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/spf13/afero"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestCallbackInstaller_Install(t *testing.T) {
@@ -25,7 +26,7 @@ func TestCallbackInstaller_Install(t *testing.T) {
 	expected := &plugin.Plugin{Name: "my-plugin"}
 
 	assert.Equal(t, expected, actual)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 func TestNew(t *testing.T) {
@@ -56,7 +57,7 @@ func TestNew_NotFound(t *testing.T) {
 	expected := `unknown installer`
 
 	assert.Nil(t, actual)
-	assert.EqualError(t, err, expected)
+	require.EqualError(t, err, expected)
 }
 
 func TestFind(t *testing.T) {
@@ -93,5 +94,5 @@ func TestFind_Error(t *testing.T) {
 	expected := `no supported installer`
 
 	assert.Nil(t, actual)
-	assert.EqualError(t, err, expected)
+	require.EqualError(t, err, expected)
 }

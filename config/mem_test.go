@@ -4,11 +4,12 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/nhatthm/plugin-registry/config"
 	"github.com/nhatthm/plugin-registry/mock/configurator"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestNewMemConfigurator(t *testing.T) {
@@ -45,10 +46,10 @@ func TestNewMemConfigurator(t *testing.T) {
 
 			if tc.expectedError == "" {
 				assert.NotNil(t, c)
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
 				assert.Nil(t, c)
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -173,9 +174,9 @@ func TestMemConfigurator_SetPlugin(t *testing.T) {
 			assert.Equal(t, tc.expectedConfig, actualCfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -256,9 +257,9 @@ func TestMemConfigurator_RemovePlugin(t *testing.T) {
 			assert.Equal(t, tc.expectedConfig, actualCfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -378,9 +379,9 @@ func TestMemConfigurator_EnablePlugin(t *testing.T) {
 			assert.Equal(t, tc.expectedConfig, actualCfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -500,9 +501,9 @@ func TestMemConfigurator_DisablePlugin(t *testing.T) {
 			assert.Equal(t, tc.expectedConfig, actualCfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
