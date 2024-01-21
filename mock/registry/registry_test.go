@@ -5,9 +5,11 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/nhatthm/plugin-registry/config"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestConfig(t *testing.T) {
@@ -51,9 +53,9 @@ func TestConfig(t *testing.T) {
 			assert.Equal(t, tc.expectedConfig, cfg)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -92,9 +94,9 @@ func TestEnable(t *testing.T) {
 			err := tc.mockRegistry(t).Enable("my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -133,9 +135,9 @@ func TestDisable(t *testing.T) {
 			err := tc.mockRegistry(t).Disable("my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -174,9 +176,9 @@ func TestInstall(t *testing.T) {
 			err := tc.mockRegistry(t).Install(context.Background(), "my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -215,9 +217,9 @@ func TestUninstall(t *testing.T) {
 			err := tc.mockRegistry(t).Uninstall("my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}

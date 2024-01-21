@@ -46,10 +46,10 @@ func TestNewRegistry(t *testing.T) {
 
 			if tc.expectedError == "" {
 				assert.NotNil(t, r)
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
 				assert.Nil(t, r)
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}

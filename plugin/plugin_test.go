@@ -447,9 +447,9 @@ artifacts:
 			assert.Equal(t, tc.expectedResult, result)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -540,9 +540,9 @@ func TestLoad(t *testing.T) {
 			assert.Equal(t, tc.expectedResult, result)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
@@ -554,5 +554,5 @@ func TestLoadError(t *testing.T) {
 	err := loadError(errors.New("error"), "/tmp")
 	expected := `could not read metadata: error`
 
-	assert.EqualError(t, err, expected)
+	require.EqualError(t, err, expected)
 }

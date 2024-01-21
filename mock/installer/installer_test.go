@@ -5,8 +5,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/nhatthm/plugin-registry/plugin"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"github.com/nhatthm/plugin-registry/plugin"
 )
 
 func TestInstaller_Install(t *testing.T) {
@@ -46,9 +48,9 @@ func TestInstaller_Install(t *testing.T) {
 			assert.Equal(t, tc.expectedResult, p)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}

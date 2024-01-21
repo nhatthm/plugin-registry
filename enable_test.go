@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 )
 
 func TestRegistry_Enable(t *testing.T) {
@@ -45,9 +45,9 @@ func TestRegistry_Enable(t *testing.T) {
 			err = r.Enable("my-plugin")
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}

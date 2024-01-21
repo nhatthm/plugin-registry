@@ -5,15 +5,15 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/spf13/afero"
+	"github.com/stretchr/testify/require"
+
 	registry "github.com/nhatthm/plugin-registry"
 	"github.com/nhatthm/plugin-registry/config"
 	"github.com/nhatthm/plugin-registry/installer"
 	configuratorMock "github.com/nhatthm/plugin-registry/mock/configurator"
 	installerMock "github.com/nhatthm/plugin-registry/mock/installer"
 	"github.com/nhatthm/plugin-registry/plugin"
-	"github.com/spf13/afero"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestRegistry_Install(t *testing.T) {
@@ -123,9 +123,9 @@ func TestRegistry_Install(t *testing.T) {
 			err = r.Install(context.Background(), tc.source)
 
 			if tc.expectedError == "" {
-				assert.NoError(t, err)
+				require.NoError(t, err)
 			} else {
-				assert.EqualError(t, err, tc.expectedError)
+				require.EqualError(t, err, tc.expectedError)
 			}
 		})
 	}
