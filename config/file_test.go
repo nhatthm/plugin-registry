@@ -68,7 +68,7 @@ func TestFileConfigurator_Config(t *testing.T) {
 			scenario: "could not open file",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(nil, errors.New("open error"))
@@ -79,7 +79,7 @@ func TestFileConfigurator_Config(t *testing.T) {
 			scenario: "could not decode",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(mem.NewFileHandle(mem.CreateFile("config.yaml")), nil)
@@ -105,7 +105,7 @@ plugins:
 `, runtime.GOOS, runtime.GOARCH)
 
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
@@ -279,7 +279,7 @@ func TestFileConfigurator_RemovePlugin_Error(t *testing.T) {
 			scenario: "could not open file for write",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
@@ -372,7 +372,7 @@ func TestFileConfigurator_EnablePlugin_Error(t *testing.T) {
 			scenario: "plugin not found",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
@@ -384,7 +384,7 @@ func TestFileConfigurator_EnablePlugin_Error(t *testing.T) {
 			scenario: "could not open file for write",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
@@ -493,7 +493,7 @@ func TestFileConfigurator_DisablePlugin_Error(t *testing.T) {
 			scenario: "plugin not found",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
@@ -505,7 +505,7 @@ func TestFileConfigurator_DisablePlugin_Error(t *testing.T) {
 			scenario: "could not open file for write",
 			mockFs: aferomock.MockFs(func(fs *aferomock.Fs) {
 				fs.On("Stat", "config.yaml").
-					Return(aferomock.NewFileInfo(), nil)
+					Return(aferomock.NopFileInfo(t), nil)
 
 				fs.On("Open", "config.yaml").
 					Return(makeConfigFile(cfg), nil)
