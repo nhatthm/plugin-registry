@@ -33,7 +33,7 @@ func TestIntegrationFsRegistry_Install_NoConfigFile(t *testing.T) {
 	installer.Register(t.Name(), func(_ context.Context, source string) bool {
 		return source == t.Name()
 	}, func(afero.Fs) installer.Installer {
-		return installer.CallbackInstaller(func(_ context.Context, dest, src string) (*plugin.Plugin, error) {
+		return installer.CallbackInstaller(func(context.Context, string, string) (*plugin.Plugin, error) {
 			p := &plugin.Plugin{
 				Name:        "my-plugin",
 				URL:         "https://example.org",
@@ -107,7 +107,7 @@ func TestIntegrationFsRegistry_Install_HasConfigFile(t *testing.T) {
 	installer.Register(t.Name(), func(_ context.Context, source string) bool {
 		return source == t.Name()
 	}, func(afero.Fs) installer.Installer {
-		return installer.CallbackInstaller(func(_ context.Context, dest, src string) (*plugin.Plugin, error) {
+		return installer.CallbackInstaller(func(context.Context, string, string) (*plugin.Plugin, error) {
 			p := &plugin.Plugin{
 				Name:        "my-plugin",
 				URL:         "https://example.org",
@@ -195,7 +195,7 @@ func TestIntegrationFsRegistry_Install_HasDisabledPlugin(t *testing.T) {
 	installer.Register(t.Name(), func(_ context.Context, source string) bool {
 		return source == t.Name()
 	}, func(afero.Fs) installer.Installer {
-		return installer.CallbackInstaller(func(_ context.Context, dest, src string) (*plugin.Plugin, error) {
+		return installer.CallbackInstaller(func(context.Context, string, string) (*plugin.Plugin, error) {
 			p := &plugin.Plugin{
 				Name:        "my-plugin",
 				URL:         "https://example.org",
