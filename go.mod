@@ -7,7 +7,7 @@ require (
 	github.com/spf13/afero v1.11.0
 	github.com/stretchr/testify v1.9.0
 	go.nhat.io/aferocopy/v2 v2.0.2
-	go.nhat.io/aferomock v0.6.0
+	go.nhat.io/aferomock v0.7.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
